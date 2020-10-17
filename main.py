@@ -1,25 +1,22 @@
+#import all the necessary files in order to access the functions.
+#Tkinter is the standard GUI library for Python.
 from tkinter import *
 from tkinter.messagebox import *
 import math as m
-from audio_helper import PlayAudio
-import threading
 
-# some useful variables
-font = ('Verdana', 20, 'bold')
-ob = PlayAudio()
+# common font size.
+font = ('Times New Roman',14, 'bold')
 
-
-# important functions
+#functions to activate the working of button.
 def clear():
     ex = textField.get()
     ex = ex[0:len(ex) - 1]
     textField.delete(0, END)
     textField.insert(0, ex)
 
-
-def all_clear():
+#this function is created to clear of all inputs in one go.
+   def all_clear():
     textField.delete(0, END)
-
 
 def click_btn_function(event):
     global p
@@ -27,19 +24,17 @@ def click_btn_function(event):
     b = event.widget
     text = b['text']
     print(text)
-    t = threading.Thread(target=ob.speak, args=(text,))
-    t.start()
 
-    if text == 'x':
+    if text = = 'x':
         textField.insert(END, "*")
         return
 
     if text == '=':
         try:
             ex = textField.get()
-            anser = eval(ex)
+            ans = eval(ex)
             textField.delete(0, END)
-            textField.insert(0, anser)
+            textField.insert(0, ans)
         except Exception as e:
             print("Error..", e)
             showerror("Error", e)
@@ -47,25 +42,25 @@ def click_btn_function(event):
 
     textField.insert(END, text)
 
-
 # creating a window
 window = Tk()
 window.title('My Calculator')
-window.geometry('510x550')
+window.geometry('300x465')
+
 # picture label
-pic = PhotoImage(file='img/cal2.png')
+pic = PhotoImage(file='sci.png')
 headingLabel = Label(window, image=pic)
 headingLabel.pack(side=TOP, pady=10)
 
 # heading label
-heading = Label(window, text='My Calculator', font=font, underline=0)
+heading = Label(window, text='Solve your problem', font=font)
 heading.pack(side=TOP)
 
 # textfiled
 textField = Entry(window, font=font, justify=CENTER)
 textField.pack(side=TOP, pady=10, fill=X, padx=10)
-# buttons
 
+#buttons
 buttonFrame = Frame(window)
 buttonFrame.pack(side=TOP, padx=10)
 
@@ -73,49 +68,81 @@ buttonFrame.pack(side=TOP, padx=10)
 temp = 1
 for i in range(0, 3):
     for j in range(0, 3):
-        btn = Button(buttonFrame, text=str(temp), font=font, width=5, relief='ridge', activebackground='orange',
-                     activeforeground='white')
+        btn = Button(buttonFrame, text=str(temp), font=font, width=5, relief='ridge', activebackground='black',
+                     activeforeground='yellow')
         btn.grid(row=i, column=j)
         temp = temp + 1
         btn.bind('<Button-1>', click_btn_function)
 
-zeroBtn = Button(buttonFrame, text='0', font=font, width=5, relief='ridge', activebackground='orange',
-                 activeforeground='white')
+zeroBtn = Button(buttonFrame, text='0', font=font, width=5, relief='ridge', activebackground='black',
+                 activeforeground='yellow')
 zeroBtn.grid(row=3, column=0)
 
-dotBtn = Button(buttonFrame, text='.', font=font, width=5, relief='ridge', activebackground='orange',
-                activeforeground='white')
+dotBtn = Button(buttonFrame, text='.', font=font, width=5, relief='ridge', activebackground='black',
+                activeforeground='yellow')
 dotBtn.grid(row=3, column=1)
 
-equalBtn = Button(buttonFrame, text='=', font=font, width=5, relief='ridge', activebackground='orange',
-                  activeforeground='white')
+equalBtn = Button(buttonFrame, text='=', font=font, width=5, relief='ridge', activebackground='black',
+                  activeforeground='yellow')
 equalBtn.grid(row=3, column=2)
 
-plusBtn = Button(buttonFrame, text='+', font=font, width=5, relief='ridge', activebackground='orange',
-                 activeforeground='white')
+plusBtn = Button(buttonFrame, text='+', font=font, width=5, relief='ridge', activebackground='black',
+                 activeforeground='yellow')
 plusBtn.grid(row=0, column=3)
 
-minusBtn = Button(buttonFrame, text='-', font=font, width=5, relief='ridge', activebackground='orange',
-                  activeforeground='white')
+minusBtn = Button(buttonFrame, text='-', font=font, width=5, relief='ridge', activebackground='black',
+                  activeforeground='yellow')
 minusBtn.grid(row=1, column=3)
 
-multBtn = Button(buttonFrame, text='x', font=font, width=5, relief='ridge', activebackground='orange',
-                 activeforeground='white')
+multBtn = Button(buttonFrame, text='x', font=font, width=5, relief='ridge', activebackground='black',
+                 activeforeground='yellow')
 multBtn.grid(row=2, column=3)
 
-divideBtn = Button(buttonFrame, text='/', font=font, width=5, relief='ridge', activebackground='orange',
-                   activeforeground='white')
+divideBtn = Button(buttonFrame, text='/', font=font, width=5, relief='ridge', activebackground='black',
+                   activeforeground='yellow')
 divideBtn.grid(row=3, column=3)
 
-clearBtn = Button(buttonFrame, text='<--', font=font, width=11, relief='ridge', activebackground='orange',
-                  activeforeground='white', command=clear)
-clearBtn.grid(row=4, column=0, columnspan=2)
+sqrtBtn = Button(buttonFrame, text='√', font=font, width=5, relief='ridge', activebackground='black',
+                 activeforeground='yellow')
+sqrtBtn.grid(row=4, column=0)
 
-allClearBtn = Button(buttonFrame, text='AC', font=font, width=11, relief='ridge', activebackground='orange',
-                     activeforeground='white', command=all_clear)
-allClearBtn.grid(row=4, column=2, columnspan=2)
+powBtn = Button(buttonFrame, text='^', font=font, width=5, relief='ridge', activebackground='black',
+                activeforeground='yellow')
+powBtn.grid(row=4, column=1)
 
-# binding all btns
+factBtn = Button(buttonFrame, text='x!', font=font, width=5, relief='ridge', activebackground='black',
+                 activeforeground='yellow')
+factBtn.grid(row=4, column=2)
+
+radBtn = Button(buttonFrame, text='toRad', font=font, width=5, relief='ridge', activebackground='black',
+                activeforeground='yellow')
+radBtn.grid(row=4, column=3)
+
+degBtn = Button(buttonFrame, text='toDeg', font=font, width=5, relief='ridge', activebackground='black',
+                activeforeground='yellow')
+degBtn.grid(row=5, column=0)
+
+sinBtn = Button(buttonFrame, text='sinθ', font=font, width=5, relief='ridge', activebackground='black',
+                activeforeground='yellow')
+sinBtn.grid(row=5, column=1)
+
+cosBtn = Button(buttonFrame, text='cosθ', font=font, width=5, relief='ridge', activebackground='black',
+                activeforeground='yellow')
+cosBtn.grid(row=5, column=2)
+
+tanBtn = Button(buttonFrame, text='tanθ', font=font, width=5, relief='ridge', activebackground='black',
+                activeforeground='yellow')
+tanBtn.grid(row=5, column=3)
+
+clearBtn = Button(buttonFrame, text='backspace', font=font, width=11, relief='ridge', activebackground='black',
+                  activeforeground='yellow', command=clear)
+clearBtn.grid(row=6, column=0, columnspan=2)
+
+allClearBtn = Button(buttonFrame, text='AC', font=font, width=11, relief='ridge', activebackground='black',
+                     activeforeground='yellow', command=all_clear)
+allClearBtn.grid(row=6, column=2, columnspan=2)
+
+# binding the buttons
 plusBtn.bind('<Button-1>', click_btn_function)
 minusBtn.bind('<Button-1>', click_btn_function)
 multBtn.bind('<Button-1>', click_btn_function)
@@ -124,55 +151,16 @@ zeroBtn.bind('<Button-1>', click_btn_function)
 dotBtn.bind('<Button-1>', click_btn_function)
 equalBtn.bind('<Button-1>', click_btn_function)
 
-
 def enterClick(event):
     print('hi')
     e = Event()
     e.widget = equalBtn
     click_btn_function(e)
 
-
 textField.bind('<Return>', enterClick)
-#####################################################################################################
-# functions 2nd video functions.......
-scFrame = Frame(window)
 
-sqrtBtn = Button(scFrame, text='√', font=font, width=5, relief='ridge', activebackground='orange',
-                 activeforeground='white')
-sqrtBtn.grid(row=0, column=0)
-
-powBtn = Button(scFrame, text='^', font=font, width=5, relief='ridge', activebackground='orange',
-                activeforeground='white')
-powBtn.grid(row=0, column=1)
-
-factBtn = Button(scFrame, text='x!', font=font, width=5, relief='ridge', activebackground='orange',
-                 activeforeground='white')
-factBtn.grid(row=0, column=2)
-
-radBtn = Button(scFrame, text='toRad', font=font, width=5, relief='ridge', activebackground='orange',
-                activeforeground='white')
-radBtn.grid(row=0, column=3)
-
-degBtn = Button(scFrame, text='toDeg', font=font, width=5, relief='ridge', activebackground='orange',
-                activeforeground='white')
-degBtn.grid(row=1, column=0)
-
-sinBtn = Button(scFrame, text='sinθ', font=font, width=5, relief='ridge', activebackground='orange',
-                activeforeground='white')
-sinBtn.grid(row=1, column=1)
-
-cosBtn = Button(scFrame, text='cosθ', font=font, width=5, relief='ridge', activebackground='orange',
-                activeforeground='white')
-cosBtn.grid(row=1, column=2)
-
-tanBtn = Button(scFrame, text='tanθ', font=font, width=5, relief='ridge', activebackground='orange',
-                activeforeground='white')
-tanBtn.grid(row=1, column=3)
-
-normalcalc = True
-
-
-def calculate_sc(event):
+#this function is created to calculate all the mathematical operations by calling the functions from the math library file.
+ def calculate(event):
     print('btn..')
     btn = event.widget
     text = btn['text']
@@ -182,12 +170,9 @@ def calculate_sc(event):
     if text == 'toDeg':
         print("cal degree")
         answer = str(m.degrees(float(ex)))
-
-
     elif text == 'toRad':
         print('radian')
         answer = str(m.radians(float(ex)))
-
     elif text == 'x!':
         print("cal factorial")
         answer = str(m.factorial(int(ex)))
@@ -207,48 +192,17 @@ def calculate_sc(event):
         print(base)
         print(pow)
         answer = m.pow(int(base), int(pow))
-
     textField.delete(0, END)
     textField.insert(0, answer)
 
-
-def sc_click():
-    global normalcalc
-    if normalcalc:
-        # sc...
-        buttonFrame.pack_forget()
-        # add sc frame
-        scFrame.pack(side=TOP, pady=20)
-        buttonFrame.pack(side=TOP)
-        window.geometry('510x700')
-        print("show sc")
-        normalcalc = False
-    else:
-        print('show normal')
-        scFrame.pack_forget()
-        window.geometry('510x550')
-        normalcalc = True
-
-
-# end functions
-# binding sc buttons
-sqrtBtn.bind("<Button-1>", calculate_sc)
-powBtn.bind("<Button-1>", calculate_sc)
-factBtn.bind("<Button-1>", calculate_sc)
-radBtn.bind("<Button-1>", calculate_sc)
-degBtn.bind("<Button-1>", calculate_sc)
-sinBtn.bind("<Button-1>", calculate_sc)
-cosBtn.bind("<Button-1>", calculate_sc)
-tanBtn.bind("<Button-1>", calculate_sc)
-
-fontMenu = ('', 15)
-menubar = Menu(window, font=fontMenu)
-
-mode = Menu(menubar, font=fontMenu, tearoff=0)
-mode.add_checkbutton(label="Scientific Calculator", command=sc_click)
-
-menubar.add_cascade(label="Mode", menu=mode)
-
-window.config(menu=menubar)
-
+#binding the remaining buttons
+sqrtBtn.bind("<Button-1>", calculate)
+powBtn.bind("<Button-1>", calculate)
+factBtn.bind("<Button-1>",calculate)
+radBtn.bind("<Button-1>", calculate)
+degBtn.bind("<Button-1>", calculate)
+sinBtn.bind("<Button-1>", calculate)
+cosBtn.bind("<Button-1>", calculate)
+tanBtn.bind("<Button-1>", calculate)
 window.mainloop()
+
